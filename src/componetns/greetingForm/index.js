@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
+import './style.css'
 
 class GreetingForm extends Component {
     state = {
@@ -13,19 +14,23 @@ class GreetingForm extends Component {
             {name} = user;
 
         const unKnownUser =
-            <div>
+            <div className="greeting-form">
                 <div className="greeting__head">Представьтесь и мы продолжим общение</div>
-                <input type="text" name="greeting-name" onChange={this.handleChange}/>
-                <button onClick={this.handleSubmit}>Отправить</button>
+                <form className={"greeting-submit"} action="" onSubmit={this.handleSubmit}>
+                    <input placeholder={"Type your name..."} type="text" name="greeting-name" onChange={this.handleChange}/>
+                    <button className={"greeting-link"} type="submit">Отправить</button>
+                </form>
             </div>;
 
-        let knownUser = <div>
-            <Link to="/page">Go to page </Link>
+        let knownUser = <div className="greeting-form">
             You are welcome, {name}
+            <p>
+                <Link className="greeting-link" to="/page">current weather</Link>
+            </p>
         </div>;
 
         return (
-            <div>
+            <div className="greeting-wrap">
                 {name ? knownUser : unKnownUser}
             </div>
         );
@@ -37,7 +42,9 @@ class GreetingForm extends Component {
         });
     };
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
+        e.preventDefault()
+
         const value = this.state.value;
 
         if (value !== '') {

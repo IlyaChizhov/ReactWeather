@@ -10,7 +10,6 @@ import Extreme from '../../assets/img/Extreme.jpg'
 import Additional from '../../assets/img/Additional.jpg'
 import {connect} from 'react-redux'
 
-
 import './style.css'
 
 const images = {
@@ -28,19 +27,27 @@ const images = {
 class BackgroundImage extends Component {
     render() {
         const {response} = this.props.weather,
-            bgImage = response ? images[`${response.weather[0].main}`] : images['Additional']
+            bgImage = response ? <img onLoad={this.handleLoad} src={images[`${response.weather[0].main}`]} alt=""/>
+                : ''
 
         return (
             <div>
-                <img src={bgImage} alt=""/>
+                {bgImage}
             </div>
         )
+    }
+
+    handleLoad = () => {
+        this.props.dispatch({
+            type: 'TOGGLE_PRELOADER'
+        })
     }
 }
 
 function mapStateToProps(state) {
     return {
-        weather: state.weather
+        weather: state.weather,
+        preloader: state.preloader
     }
 }
 

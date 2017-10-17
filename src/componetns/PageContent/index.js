@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import BackgroundImage from '../BackgroundImage'
 import WeatherBlock from '../WeatherBlock'
+import Preloader from '../Preloader'
 
 export default class Content extends Component {
     render() {
@@ -8,6 +9,7 @@ export default class Content extends Component {
             <div>
                 <WeatherBlock />
                 <BackgroundImage />
+                <Preloader />
             </div>
         )
     }
