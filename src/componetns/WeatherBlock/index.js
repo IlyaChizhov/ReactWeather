@@ -5,24 +5,25 @@ import './style.css'
 
 class WeatherBlock extends Component {
     render() {
-        const {response} = this.props.weather
+        const {response} = this.props,
+            bool = Boolean(Object.keys(response).length)
         return (
             <div className="weather">
                 <h2 className={'header'}>Текущая погода на вашей улице:</h2>
                 <p>
-                    Улица : {response ? response.name : 'Подождем...'}
+                    Улица : {bool ? response.name : 'Подождем...'}
                 </p>
                 <p>
-                    Описание : {response ? response.weather[0].main : 'Подождем...'}
+                    Описание : {bool ? response.weather[0].main : 'Подождем...'}
                 </p>
                 <p>
-                    Скорость ветра : {response ? response.wind.speed + 'м/с' : 'Подождем...'}
+                    Скорость ветра : {bool ? response.wind.speed + 'м/с' : 'Подождем...'}
                 </p>
                 <p>
-                    Влажность : {response ? response.main.humidity + '%' : 'Подождем...'}
+                    Влажность : {bool ? response.main.humidity + '%' : 'Подождем...'}
                 </p>
                 <p>
-                    Температура : {response ? Math.round(response.main.temp - 273) + ' ºC' : 'Подождем...'}
+                    Температура : {bool ? Math.round(response.main.temp - 273) + ' ºC' : 'Подождем...'}
                 </p>
 
             </div>
@@ -33,7 +34,7 @@ class WeatherBlock extends Component {
 
 function mapStateToProps(state) {
     return {
-        weather: state.weather
+        response: state.weather
     }
 }
 

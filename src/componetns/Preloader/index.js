@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import './style.css'
 
@@ -22,7 +22,7 @@ function Preloader(props) {
 
         return (
             <div>
-                {props.preloader.preloader ? preloadBlock : ''}
+                {props.preloader ? preloadBlock : ''}
             </div>
         )
 

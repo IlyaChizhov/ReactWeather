@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import Clouds from '../../assets/img/Clouds.jpg'
 import Rain from '../../assets/img/Rain.jpg'
 import Clear from '../../assets/img/Clear.jpg'
@@ -8,6 +8,7 @@ import Snow from '../../assets/img/Snow.jpg'
 import Atmosphere from '../../assets/img/Atmosphere.jpg'
 import Extreme from '../../assets/img/Extreme.jpg'
 import Additional from '../../assets/img/Additional.jpg'
+import {togglePreloader} from '../../AC/togglePreloader'
 import {connect} from 'react-redux'
 
 import './style.css'
@@ -24,32 +25,28 @@ const images = {
     Additional
 }
 
-class BackgroundImage extends Component {
-    render() {
-        const {response} = this.props.weather,
-            bgImage = response ? <img onLoad={this.handleLoad} src={images[`${response.weather[0].main}`]} alt=""/>
-                : ''
-
-        return (
-            <div>
-                {bgImage}
-            </div>
-        )
+function BackgroundImage(props) {
+    const handleLoad = () => {
+        props.togglePreloader()
     }
+    const {response} = props,
+        bool = Boolean(Object.keys(response).length),
+        bgImage = bool ? <img onLoad={handleLoad} src={images[`${response.weather[0].main}`]} alt=""/>
+            : ''
 
-    handleLoad = () => {
-        this.props.dispatch({
-            type: 'TOGGLE_PRELOADER'
-        })
-    }
+    return (
+        <div>
+            {bgImage}
+        </div>
+    )
 }
 
 function mapStateToProps(state) {
     return {
-        weather: state.weather,
+        response: state.weather,
         preloader: state.preloader
     }
 }
 
-export default connect(mapStateToProps)(BackgroundImage)
+export default connect(mapStateToProps, {togglePreloader})(BackgroundImage)
 

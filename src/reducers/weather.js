@@ -1,11 +1,12 @@
-const initialState = {
-    response: {}
-}
+import {GET_WEATHER} from '../constants'
 
 export default function weather(state = {}, action) {
-    switch(action.type) {
-        case 'GET_WEATHER':
-            return {...state, response: action.payload}
+    const {payload, type} = action
+
+    switch (type) {
+        case GET_WEATHER:
+            return payload
+        default:
+            return state
     }
-    return state;
 }

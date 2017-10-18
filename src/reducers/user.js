@@ -1,20 +1,14 @@
+import {GET_USER} from '../constants'
+
 const log = () => {
   return localStorage.getItem('userName')
 }
 
-
-const initialState = {
-        user: {
-            name: log()
-        }
-};
-
-
-export default function page(state = initialState, action) {
-
-    switch (action.type) {
-        case 'GET_USER':
-            return {...state, user: action.payload}
+export default function page(state = {name: log()}, action) {
+const {payload ,type} = action
+    switch (type) {
+        case GET_USER:
+            return { name: payload}
 
         default:
             return state;

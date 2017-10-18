@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Route, Switch} from 'react-router-dom'
-import GreetingForm from '../componetns/greetingForm/index'
+import GreetingForm from '../componetns/GreetingForm/index'
 import PageContent from '../componetns/PageContent/index'
 
 class Main extends Component {

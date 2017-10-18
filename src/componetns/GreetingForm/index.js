@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {getUser} from "../../AC/getUser";
 
 import './style.css'
 
@@ -10,14 +11,15 @@ class GreetingForm extends Component {
     };
 
     render() {
-        const {user} = this.props.user,
+        const {user} = this.props,
             {name} = user;
 
         const unKnownUser =
             <div className="greeting-form">
                 <div className="greeting__head">Представьтесь и мы продолжим общение</div>
                 <form className={"greeting-submit"} action="" onSubmit={this.handleSubmit}>
-                    <input placeholder={"Type your name..."} type="text" name="greeting-name" onChange={this.handleChange}/>
+                    <input placeholder={"Type your name..."} type="text" name="greeting-name"
+                           onChange={this.handleChange}/>
                     <button className={"greeting-link"} type="submit">Отправить</button>
                 </form>
             </div>;
@@ -49,13 +51,7 @@ class GreetingForm extends Component {
 
         if (value !== '') {
             localStorage.setItem('userName', value);
-            let obj = {
-                name: value
-            };
-            this.props.dispatch({
-                type: 'GET_USER',
-                payload: obj
-            });
+            this.props.getUser(value);
             this.props.history.push('/page');
         }
     };
@@ -67,5 +63,5 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(GreetingForm);
+export default connect(mapStateToProps, {getUser})(GreetingForm);
 

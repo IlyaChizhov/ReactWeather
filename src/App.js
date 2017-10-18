@@ -1,22 +1,18 @@
 import React, {Component} from 'react'
 import {Route, Switch} from 'react-router-dom'
-import GreetingForm from './componetns/greetingForm/index'
+import GreetingForm from './componetns/GreetingForm/index'
 import PageContent from './componetns/PageContent/index'
-import { connect } from 'react-redux'
-
+import {connect} from 'react-redux'
+import {getWeather} from "./AC/getWeather";
 
 
 class App extends Component {
-
     componentWillMount() {
-        // const { getWeather} = this.props
-        console.log(this.props);
         const promise = new Promise((res, rej) => {
             try {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     let lat = position.coords.latitude
                     let lon = position.coords.longitude
-                    console.log(position.coords.latitude, position.coords.longitude);
                     res({lat, lon})
                 });
             } catch (err) {
@@ -33,14 +29,9 @@ class App extends Component {
 
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState === 4) {
-                        if(xhr.status === 200) {
+                        if (xhr.status === 200) {
                             const res = JSON.parse(xhr.responseText)
-
-                            this.props.dispatch({
-                                type: 'GET_WEATHER',
-                                payload: res
-                            })
-
+                            this.props.getWeather(res)
                         } else {
                             alert('программиста уже уволили, попробуйте снова!')
                         }
@@ -62,11 +53,10 @@ class App extends Component {
     }
 }
 
-
 function mapStateToProps(state) {
     return {
         weather: state.weather
     }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, {getWeather})(App)

@@ -1,7 +1,8 @@
-export function togglePreloader() {
+import {TOGGLE_PRELOADER} from '../constants'
 
+export function togglePreloader() {
     return {
-        type: 'TOGGLE_PRELOADER'
+        type: TOGGLE_PRELOADER
     }
 
 }
