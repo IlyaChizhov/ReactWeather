@@ -3,7 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../../assets/img/Additional.jpg');
+    background: url('../../assets/img/Additional.jpg') no-repeat;
+    background-size: cover;
 }
 
 .greeting-form {
