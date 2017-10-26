@@ -1,18 +1,11 @@
-  Простой pet-project, показывающий погоду за окном и  созданный для 
-  знакомства с react, redux и react-router
-  
-  Функционал: 
-  - приветствие пользователя или страница входа (если первый раз 
-  попали на сайт)
-  - панель погоды (скорость ветра, температура, влажность, описание и улица
-  ) данные предоставлены <a href="https://openweathermap.org/" target="_blank">https://openweathermap.org/</a>
-  - фоновая картинка меняется в зависимости от погоды
-  
-  P.S: 
-  - предстоит доделать обработку отказа пользователя
-  в определении геолокации
-  
-  - написать prop-types
-  
-  - сделать волшебную кнопку "переехать" которая изменит погоду хотя бы 
-  в этом приложении =)
+## A simple pet-project showing the weather outside and created to get to know the React, Redux and React-router.
+
+Functional:
+- User's welcome or login page (if the first time they visit the site);
+- The weather panel (wind speed, temperature, humidity, description and street) is provided by https://openweathermap.org/
+- The background picture changes depending on the weather.
+
+P.S:
+- You should complete the processing of the user's refusing in the definition of geolocation;
+- Write prop-types;
+- Make the magic button "move" which will change the weather at least in this application =)
